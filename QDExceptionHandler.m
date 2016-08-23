@@ -15,10 +15,7 @@
 // 设置一个C函数，用来接收崩溃信息
 void UncaughtExceptionHandler(NSException *exception){
     // 可以通过exception对象获取一些崩溃信息，我们就是通过这些崩溃信息来进行解析的，例如下面的symbols数组就是我们的崩溃堆栈。
-    NSArray *symbols = [exception callStackSymbols];
-    NSString *reason = [exception reason];
-    NSString *name = [exception name];
-    NSDictionary *userInfo = [exception userInfo];
+
     
     //获取当前时间
     // 获取系统当前时间
@@ -44,6 +41,10 @@ void UncaughtExceptionHandler(NSException *exception){
     
     NSMutableDictionary *exceptionDictionary = [NSMutableDictionary dictionary];
     
+    NSArray *symbols = [exception callStackSymbols];
+    NSString *reason = [exception reason];
+    NSString *name = [exception name];
+    NSDictionary *userInfo = [exception userInfo];
     [exceptionDictionary setValue:crashTime forKey:@"crashTime"];
     [exceptionDictionary setValue:deviceDictionary forKey:@"deviceDictionary"];
     [exceptionDictionary setValue:symbols forKey:@"symbols"];
